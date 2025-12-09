@@ -10,7 +10,10 @@ ctx.fillStyle = 'white';
 ctx.fillRect(200, 300, 50, 50);
 ctx.fillStyle = 'orange';
 ctx.fillRect(100, 400, 50, 50);
-
+ctx.beginPath();
+ctx.arc(100, 100, 50, 0, 2 * Math.PI);
+ctx.fillStyle = 'blue';
+ctx.fill(); 
 function getRandomHexColor() {
     // Genera un numero casuale tra 0 e 16777215 (FF in esadecimale)
     let color = Math.round(Math.random() * 16777215);
@@ -81,34 +84,62 @@ const rectangles = [];
 
 
 function setup() {
-    for (let i = 0; i < 200; i++) {
+    // for (let i = 0; i < 1000; i++) {
+    //     const red = Math.round(Math.random() * 255);
+    //     const blue = Math.round(Math.random() * 255);
+    //     const green = Math.round(Math.random() * 255);
+    //     const alpha = Math.random();
+
+    //     const width = 2;
+    //     const height = 2;
+
+    //     // ctx.fillStyle = 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha + ')';
+
+
+
+    //     const ramdomX = Math.random() * (800 - width);
+    //     const ramdomY = Math.random() * (800 - height);
+    //     const ranvX = (Math.random() * 4) - 2;
+    //     const ranvY = (Math.random() * 4) - 2;
+
+
+    //     const rect = {
+    //         x: 400,
+    //         y: 400,
+    //         width: 10,
+    //         height: 10,
+    //         color: 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha + ')',
+    //         vX: ranvX,
+    //         vY: ranvY,
+    //     }
+    //     rectangles.push(rect);
+    // }
+    for (let i = 0; i < 1000; i++) {
+
         const red = Math.round(Math.random() * 255);
-        const blue = Math.round(Math.random() * 255);
         const green = Math.round(Math.random() * 255);
+        const blue = Math.round(Math.random() * 255);
         const alpha = Math.random();
 
-        const width = 2;
-        const height = 2;
+        const width = 3;
+        const height = 3;
+        
+        const randomX = Math.random() * (800 - width);
+        const randomY = Math.random() * (800 - height);
 
-        // ctx.fillStyle = 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha + ')';
-
-
-
-        const ramdomX = Math.random() * (800 - width);
-        const ramdomY = Math.random() * (800 - height);
-        const ranvX = (Math.random() * 4) - 2;
-        const ranvY = (Math.random() * 4) - 2;
-
+        const randomVX = Math.random() * 4 - 2;
+        const randomVY = Math.random() * 4 - 2;
 
         const rect = {
             x: 400,
-            y: ramdomY,
-            width: 10,
-            height: 10,
-            color: 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha + ')',
-            vX: ranvX,
-            vY: ranvY,
+            y: 400,
+            width: width,
+            height: height,
+            color: 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha +')',
+            vX: randomVX,
+            vY: randomVY
         }
+        
         rectangles.push(rect);
     }
 
@@ -118,54 +149,100 @@ setup();
 console.log(rectangles);
 
 function update() {
+    // for (const rect of rectangles) {
+
+
+    //     rect.x += rect.vX;
+    //     rect.y += rect.vY;
+    //     if (rect.x + rect.width > 800 || rect.x < 0) {
+    //         rect.vX = rect.vX * (-1);
+    //     }
+
+    //     if (rect.y + rect.height > 800 || rect.y < 0) {
+    //         rect.vY = rect.vY * (-1);
+    //     }
+
+    //     const diceX = Math.random();
+    //     if (diceX > 0.9) {
+    //         rect.vX += Math.random()*3;
+    //     }
+    //     if (diceX < 0.1) {
+    //         rect.vX -= Math.random()*3;
+    //     }
+    //     const diceY = Math.random();
+    //     if (diceY > 0.9) {
+    //         rect.vY += Math.random()*3;
+    //     }
+    //     if (diceY < 0.1) {
+    //         rect.vY -= Math.random()*3;
+    //     }
+
+
+    //     if (rect.vX > 3) {
+    //         rect.vX = 3;
+    //     }
+    //     if (rect.vX < -3) {
+    //         rect.vX = -3;
+    //     }
+    //     if (rect.vY > 3) {
+    //         rect.vY = 3;
+    //     }
+    //     if (rect.vY < -3) {
+    //         rect.vY = -3;
+    //     }
+    // }
+     
     for (const rect of rectangles) {
+        rect.x = rect.x + rect.vX;
+        rect.y = rect.y + rect.vY;
 
-
-        rect.x += rect.vX;
-        rect.y += rect.vY;
         if (rect.x + rect.width > 800 || rect.x < 0) {
-            rect.vX = rect.vX * (-1);
+            rect.vX = rect.vX * -1;
         }
 
         if (rect.y + rect.height > 800 || rect.y < 0) {
-            rect.vY = rect.vY * (-1);
+            rect.vY = rect.vY * -1;
         }
 
         const diceX = Math.random();
-        if (diceX > 0.9) {
-            rect.vX += Math.random()*3;
+        if (diceX > 0.8) {
+            rect.vX += Math.random()
         }
-        if (diceX < 0.1) {
-            rect.vX -= Math.random()*3;
-        }
-        const diceY = Math.random();
-        if (diceY > 0.9) {
-            rect.vY += Math.random()*3;
-        }
-        if (diceY < 0.1) {
-            rect.vY -= Math.random()*3;
+        if (diceX < 0.2) {
+            rect.vX -= Math.random()
         }
 
+        const diceY = Math.random();
+        if (diceY > 0.8) {
+            rect.vY += Math.random()
+        }
+        if (diceY < 0.2) {
+            rect.vY -= Math.random()
+        }
 
         if (rect.vX > 3) {
-            rect.vX = 3;
+            rect.vX = 3
         }
         if (rect.vX < -3) {
-            rect.vX = -3;
+            rect.vX = -3
         }
         if (rect.vY > 3) {
-            rect.vY = 3;
+            rect.vY = 3
         }
         if (rect.vY < -3) {
-            rect.vY = -3;
+            rect.vY = -3
         }
+
+
     }
 }
 
 function draw() {
-     ctx.clearRect(0, 0, 800, 800);
+    //  ctx.clearRect(0, 0, 800, 800);
 //     // ctx.clearRect(0,0,800,800);
 //     ctx.fillStyle ='rgba(255,255,255,0.02)';
+//   ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+    // ctx.fillRect(0, 0, 800, 800);
     for (const rect of rectangles) {
 
         ctx.fillStyle = rect.color;
@@ -178,4 +255,3 @@ setInterval(() => {
 
     draw();
 }, 18);
-

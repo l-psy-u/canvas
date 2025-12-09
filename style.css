@@ -15,3 +15,6 @@ body{
     align-items: center;
     background-color: #000010;
 }
+#my-canvas{
+    background-color: white;
+}
